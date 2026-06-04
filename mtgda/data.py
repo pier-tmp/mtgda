@@ -123,15 +123,6 @@ def remap_set(data_dir, set_code, oracle2gid):
     }
 
 
-def split_by_draft(n, val_frac, test_frac, seed):
-    rng = np.random.default_rng(seed)
-    ids = np.arange(n)
-    rng.shuffle(ids)
-    n_val = int(n * val_frac)
-    n_test = int(n * test_frac)
-    return np.sort(ids[n_val + n_test:]), np.sort(ids[:n_val]), np.sort(ids[n_val:n_val + n_test])
-
-
 def collate(batch):
     B = len(batch)
     L_max = max(len(b["token_card"]) for b in batch)
@@ -174,12 +165,28 @@ def collate(batch):
     }
 
 
+def stratified_split(records, val_frac, test_frac, seed):
+    rng = np.random.default_rng(seed)
+    train_idx, val_idx, test_idx = [], [], []
+    for si, s in enumerate(records):
+        n = s["pack_cards"].shape[0]
+        ids = np.arange(n)
+        rng.shuffle(ids)
+        n_val = int(n * val_frac)
+        n_test = int(n * test_frac)
+        val_idx += [(si, int(d)) for d in ids[:n_val]]
+        test_idx += [(si, int(d)) for d in ids[n_val:n_val + n_test]]
+        train_idx += [(si, int(d)) for d in ids[n_val + n_test:]]
+    return train_idx, val_idx, test_idx
+
+
 def make_dataloaders(data_dir=config.DATA_DIR, batch_size=64, val_frac=config.VAL_FRAC,
                      test_frac=config.TEST_FRAC, seed=config.SEED, num_workers=0,
                      shuffle_within_pack=True, holdout=config.HOLDOUT):
     data_dir = Path(data_dir)
     cards = load_cards(data_dir)
     aux_target, aux_mask = load_aux(data_dir, cards["oracle2gid"], cards["n_cards"])
+    pick_gid = cards["pick_gid"]
 
     set_dirs = [p.name for p in sorted(data_dir.iterdir())
                 if p.is_dir() and (p / "drafts.npz").exists()]
@@ -188,22 +195,21 @@ def make_dataloaders(data_dir=config.DATA_DIR, batch_size=64, val_frac=config.VA
     test_sets = [s for s in set_dirs if s in holdout]
 
     train_records = [remap_set(data_dir, s, cards["oracle2gid"]) for s in train_sets]
-    test_records = [remap_set(data_dir, s, cards["oracle2gid"]) for s in test_sets]
+    holdout_records = [remap_set(data_dir, s, cards["oracle2gid"]) for s in test_sets]
 
-    full = MultiSetDraft(train_records, cards["pick_gid"], shuffle_within_pack=shuffle_within_pack)
-    tr, va, _ = split_by_draft(len(full), val_frac, 0.0, seed)
-    train_ds = torch.utils.data.Subset(full, tr)
-    val_full = MultiSetDraft(train_records, cards["pick_gid"], shuffle_within_pack=False)
-    val_ds = torch.utils.data.Subset(val_full, va)
-    test_ds = (MultiSetDraft(test_records, cards["pick_gid"], shuffle_within_pack=False)
-               if test_records else None)
+    tr_idx, va_idx, tk_idx = stratified_split(train_records, val_frac, test_frac, seed)
+    train_full = MultiSetDraft(train_records, pick_gid, shuffle_within_pack=shuffle_within_pack)
+    eval_full = MultiSetDraft(train_records, pick_gid, shuffle_within_pack=False)
+    pos = {p: i for i, p in enumerate(train_full.index)}
+    train_ds = torch.utils.data.Subset(train_full, [pos[p] for p in tr_idx])
+    val_ds = torch.utils.data.Subset(eval_full, [pos[p] for p in va_idx])
+    test_known_ds = torch.utils.data.Subset(eval_full, [pos[p] for p in tk_idx])
+    test_holdout_ds = (MultiSetDraft(holdout_records, pick_gid, shuffle_within_pack=False)
+                       if holdout_records else None)
 
-    train_loader = DataLoader(train_ds, batch_size=batch_size, shuffle=True,
-                              num_workers=num_workers, collate_fn=collate, drop_last=True)
-    val_loader = DataLoader(val_ds, batch_size=batch_size, shuffle=False,
-                            num_workers=num_workers, collate_fn=collate)
-    test_loader = (DataLoader(test_ds, batch_size=batch_size, shuffle=False,
-                              num_workers=num_workers, collate_fn=collate) if test_ds else None)
+    def dl(ds, shuffle=False, drop_last=False):
+        return DataLoader(ds, batch_size=batch_size, shuffle=shuffle, num_workers=num_workers,
+                          collate_fn=collate, drop_last=drop_last)
 
     meta = {
         "n_cards": cards["n_cards"], "vocab_size": cards["vocab_size"],
@@ -215,6 +221,11 @@ def make_dataloaders(data_dir=config.DATA_DIR, batch_size=64, val_frac=config.VA
         },
         "aux_target": torch.from_numpy(aux_target),
         "aux_mask": torch.from_numpy(aux_mask),
-        "train_sets": train_sets, "test_sets": test_sets,
+        "train_sets": train_sets, "holdout_sets": test_sets,
     }
-    return train_loader, val_loader, test_loader, meta
+    return {
+        "train": dl(train_ds, shuffle=True, drop_last=True),
+        "val": dl(val_ds),
+        "test_known": dl(test_known_ds),
+        "test_holdout": dl(test_holdout_ds) if test_holdout_ds else None,
+    }, meta

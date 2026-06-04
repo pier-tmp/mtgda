@@ -41,7 +41,7 @@ def suggest_cfg(trial, space):
 
 def objective(trial, space, epochs, data_dir):
     model_cfg, train_cfg = suggest_cfg(trial, space)
-    train_loader, val_loader, _, meta = make_dataloaders(
+    loaders, meta = make_dataloaders(
         data_dir, batch_size=train_cfg.batch_size,
         shuffle_within_pack=train_cfg.shuffle_within_pack)
     lit = DraftLit(meta, model_cfg, train_cfg)
@@ -56,7 +56,7 @@ def objective(trial, space, epochs, data_dir):
         callbacks=[pruning],
     )
     try:
-        trainer.fit(lit, train_loader, val_loader)
+        trainer.fit(lit, loaders["train"], loaders["val"])
     except torch.cuda.OutOfMemoryError:
         del lit, trainer
         torch.cuda.empty_cache()

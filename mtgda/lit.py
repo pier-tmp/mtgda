@@ -37,7 +37,7 @@ class DraftLit(L.LightningModule):
         return self._step(batch, "val")
 
     def test_step(self, batch, batch_idx):
-        return self._step(batch, "test")
+        return self._step(batch, "test_" + getattr(self, "test_stage", "known"))
 
     def _step(self, batch, stage):
         score, aux = self.model(batch, self._cards())

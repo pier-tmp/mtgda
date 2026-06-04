@@ -17,7 +17,7 @@ def run_training(model_cfg, train_cfg, data_dir=None, mlflow_uri=None, artifact_
         mlflow_uri = f"sqlite:///{config.ROOT / 'volume' / 'mlflow.db'}"
     artifact_location = artifact_location or f"file:{config.ROOT / 'volume' / 'mlartifacts'}"
 
-    train_loader, val_loader, test_loader, meta = make_dataloaders(data_dir, batch_size=train_cfg.batch_size, shuffle_within_pack=train_cfg.shuffle_within_pack)
+    loaders, meta = make_dataloaders(data_dir, batch_size=train_cfg.batch_size, shuffle_within_pack=train_cfg.shuffle_within_pack)
 
     lit = DraftLit(meta, model_cfg, train_cfg)
 
@@ -37,11 +37,17 @@ def run_training(model_cfg, train_cfg, data_dir=None, mlflow_uri=None, artifact_
             accelerator="auto",
             devices="auto",
         )
-        trainer.fit(lit, train_loader, val_loader)
-        test_metrics = trainer.test(lit, test_loader, ckpt_path=ckpt.best_model_path)
+        trainer.fit(lit, loaders["train"], loaders["val"])
+        lit.test_stage = "known"
+        test_known = trainer.test(lit, loaders["test_known"], ckpt_path=ckpt.best_model_path)
+        test_holdout = None
+        if loaders["test_holdout"] is not None:
+            lit.test_stage = "holdout"
+            test_holdout = trainer.test(lit, loaders["test_holdout"], ckpt_path=ckpt.best_model_path)
 
     return {"best_val_loss": float(ckpt.best_model_score),
-            "test": test_metrics[0] if test_metrics else None}
+            "test_known": test_known[0] if test_known else None,
+            "test_holdout": test_holdout[0] if test_holdout else None}
 
 
 def configs_from_params(params, max_epochs=None):
