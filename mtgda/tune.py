@@ -44,7 +44,7 @@ def objective(trial, space, epochs, data_dir):
     train_loader, val_loader, _, meta = make_dataloaders(
         data_dir, batch_size=train_cfg.batch_size,
         shuffle_within_pack=train_cfg.shuffle_within_pack)
-    lit = DraftLit(meta["vocab_size"], meta["attn_mask"], model_cfg, train_cfg)
+    lit = DraftLit(meta, model_cfg, train_cfg)
     pruning = PyTorchLightningPruningCallback(trial, monitor="val_top3")
     trainer = L.Trainer(
         max_epochs=epochs,

@@ -25,3 +25,10 @@ def batch_metrics(score, target_idx):
     k = min(3, score.shape[1])
     top3 = (score.topk(k, dim=1).indices == target_idx.unsqueeze(1)).any(1).float().mean().item()
     return {"top1": top1, "top3": top3}
+
+
+def aux_loss(pred, target, mask):
+    m = mask.sum()
+    if m == 0:
+        return pred.sum() * 0.0
+    return (((pred - target) ** 2) * mask).sum() / m

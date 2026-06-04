@@ -28,3 +28,4 @@ mlruns/
 Thumbs.db
 
 scripts/
+tests/

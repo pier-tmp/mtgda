@@ -9,6 +9,11 @@ VAL_FRAC = 0.05
 TEST_FRAC = 0.05
 SEED = 42
 
+FACE_DIM = 989
+N_LAYOUTS = 6
+LAYOUT_FLAGS = ["single", "mdfc", "transform", "split", "adventure", "flip"]
+HOLDOUT = ("SOS",)
+
 
 @dataclass
 class ModelConfig:
@@ -25,6 +30,7 @@ class TrainConfig:
     lr: float = 5.2e-4
     weight_decay: float = 2.6e-4
     label_smoothing: float = 0.079
+    aux_lambda: float = 0.1
     max_epochs: int = 40
     shuffle_within_pack: bool = True
 

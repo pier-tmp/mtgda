@@ -19,7 +19,7 @@ def run_training(model_cfg, train_cfg, data_dir=None, mlflow_uri=None, artifact_
 
     train_loader, val_loader, test_loader, meta = make_dataloaders(data_dir, batch_size=train_cfg.batch_size, shuffle_within_pack=train_cfg.shuffle_within_pack)
 
-    lit = DraftLit(meta["vocab_size"], meta["attn_mask"], model_cfg, train_cfg)
+    lit = DraftLit(meta, model_cfg, train_cfg)
 
     logger = MLFlowLogger(experiment_name=experiment_name, tracking_uri=mlflow_uri, artifact_location=artifact_location, log_model="all")
     logger.log_hyperparams({**vars(model_cfg), **vars(train_cfg)})
