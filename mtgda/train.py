@@ -11,7 +11,7 @@ from .data import make_dataloaders
 from .lit import DraftLit
 
 
-def run_training(model_cfg, train_cfg, data_dir=None, mlflow_uri=None, artifact_location=None, experiment_name="mtgda-v2", extra_callbacks=None, run_name=None, num_workers=0, profile=False):
+def run_training(model_cfg, train_cfg, data_dir=None, mlflow_uri=None, artifact_location=None, experiment_name="mtgda-v2", extra_callbacks=None, run_name=None, num_workers=0, profile=False, monitor_per_epoch=False):
     data_dir = data_dir or config.DATA_DIR
     if mlflow_uri is None:
         (config.ROOT / "volume").mkdir(parents=True, exist_ok=True)
@@ -49,7 +49,11 @@ def run_training(model_cfg, train_cfg, data_dir=None, mlflow_uri=None, artifact_
             precision="bf16-mixed",
             profiler=profiler,
         )
-        trainer.fit(lit, loaders["train"], loaders["val"])
+        if monitor_per_epoch and loaders["test_holdout"] is not None:
+            val_loaders = [loaders["val"], loaders["test_known"], loaders["test_holdout"]]
+        else:
+            val_loaders = loaders["val"]
+        trainer.fit(lit, loaders["train"], val_loaders)
         lit.test_stage = "known"
         test_known = trainer.test(lit, loaders["test_known"], ckpt_path=ckpt.best_model_path)
         test_holdout = None

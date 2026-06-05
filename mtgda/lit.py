@@ -40,8 +40,9 @@ class DraftLit(L.LightningModule):
         enc_sq = sum((p.grad.detach() ** 2).sum() for p in self.model.card_encoder.parameters() if p.grad is not None)
         self.log("gradnorm_card_encoder", float(enc_sq ** 0.5))
 
-    def validation_step(self, batch, batch_idx):
-        return self._step(batch, "val")
+    def validation_step(self, batch, batch_idx, dataloader_idx=0):
+        stage = ("val", "monitor_known", "monitor_holdout")[dataloader_idx]
+        return self._step(batch, stage)
 
     def test_step(self, batch, batch_idx):
         return self._step(batch, "test_" + getattr(self, "test_stage", "known"))
@@ -56,9 +57,10 @@ class DraftLit(L.LightningModule):
         loss = pick_loss + self.train_cfg.aux_lambda * aloss
         metrics = engine.batch_metrics(score, target_idx)
         n = target_idx.shape[0]
-        self.log(f"{stage}_loss", loss, prog_bar=True, batch_size=n)
-        self.log(f"{stage}_pick_loss", pick_loss, batch_size=n)
-        self.log(f"{stage}_aux_loss", aloss, batch_size=n)
-        self.log(f"{stage}_top1", metrics["top1"], prog_bar=True, batch_size=n)
-        self.log(f"{stage}_top3", metrics["top3"], prog_bar=True, batch_size=n)
+        kw = dict(batch_size=n, add_dataloader_idx=False)
+        self.log(f"{stage}_loss", loss, prog_bar=True, **kw)
+        self.log(f"{stage}_pick_loss", pick_loss, **kw)
+        self.log(f"{stage}_aux_loss", aloss, **kw)
+        self.log(f"{stage}_top1", metrics["top1"], prog_bar=True, **kw)
+        self.log(f"{stage}_top3", metrics["top3"], prog_bar=True, **kw)
         return loss
