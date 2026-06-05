@@ -39,11 +39,11 @@ def suggest_cfg(trial, space):
     return model_cfg, train_cfg
 
 
-def objective(trial, space, epochs, data_dir):
+def objective(trial, space, epochs, data_dir, num_workers=0):
     model_cfg, train_cfg = suggest_cfg(trial, space)
     loaders, meta = make_dataloaders(
         data_dir, batch_size=train_cfg.batch_size,
-        shuffle_within_pack=train_cfg.shuffle_within_pack)
+        shuffle_within_pack=train_cfg.shuffle_within_pack, num_workers=num_workers)
     lit = DraftLit(meta, model_cfg, train_cfg)
     pruning = PyTorchLightningPruningCallback(trial, monitor="val_top3")
     trainer = L.Trainer(
@@ -53,6 +53,7 @@ def objective(trial, space, epochs, data_dir):
         num_sanity_val_steps=0,
         accelerator="auto",
         devices="auto",
+        precision="bf16-mixed",
         callbacks=[pruning],
     )
     try:
@@ -65,7 +66,7 @@ def objective(trial, space, epochs, data_dir):
     return float(trainer.callback_metrics["val_top3"])
 
 
-def run_study(data_dir, study_db, n_trials, epochs, study_name="mtgda", fresh=False, space=None):
+def run_study(data_dir, study_db, n_trials, epochs, study_name="mtgda", fresh=False, space=None, num_workers=0):
     data_dir = data_dir or config.DATA_DIR
     space = space or TuneConfig()
     Path(study_db).parent.mkdir(parents=True, exist_ok=True)
@@ -78,7 +79,7 @@ def run_study(data_dir, study_db, n_trials, epochs, study_name="mtgda", fresh=Fa
     study = optuna.create_study(
         study_name=study_name, storage=storage, load_if_exists=True,
         direction="maximize", pruner=MedianPruner(n_startup_trials=5, n_warmup_steps=1))
-    study.optimize(lambda t: objective(t, space, epochs, data_dir), n_trials=n_trials)
+    study.optimize(lambda t: objective(t, space, epochs, data_dir, num_workers), n_trials=n_trials)
     best = {"best_value": study.best_value, "best_params": study.best_params,
             "best_trial": study.best_trial.number}
     Path(study_db).parent.mkdir(parents=True, exist_ok=True)

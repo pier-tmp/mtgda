@@ -48,12 +48,12 @@ class TuneConfig:
     batch_size: list = None
 
     def __post_init__(self):
-        if self.d_model is None:         self.d_model = [128]
-        if self.n_heads is None:         self.n_heads = [2]
-        if self.n_layers is None:        self.n_layers = (3, 3)
-        if self.ff_dim is None:          self.ff_dim = [128]
-        if self.batch_size is None:      self.batch_size = [128]
-        if self.dropout is None:         self.dropout = (0.2, 0.45)
-        if self.lr is None:              self.lr = (5e-4, 5e-3, "log")
+        if self.d_model is None:         self.d_model = [128, 256]
+        if self.n_heads is None:         self.n_heads = [4, 8]
+        if self.n_layers is None:        self.n_layers = (3, 6)
+        if self.ff_dim is None:          self.ff_dim = [256, 512, 768]
+        if self.batch_size is None:      self.batch_size = [128, 256]
+        if self.dropout is None:         self.dropout = (0.1, 0.4)
+        if self.lr is None:              self.lr = (1e-4, 3e-3, "log")
         if self.weight_decay is None:    self.weight_decay = (1e-4, 1e-2, "log")
         if self.label_smoothing is None: self.label_smoothing = (0.05, 0.13)
