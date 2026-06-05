@@ -52,7 +52,8 @@ class DecoderOnlyDraft(nn.Module):
         self.emb_role = nn.Embedding(2, d)
         self.emb_pack = nn.Embedding(3, d)
         layer = nn.TransformerEncoderLayer(d, cfg.n_heads, dim_feedforward=cfg.ff_dim,
-                                           dropout=cfg.dropout, batch_first=True, activation="gelu")
+                                           dropout=cfg.dropout, batch_first=True, activation="gelu",
+                                           norm_first=True)
         self.backbone = nn.TransformerEncoder(layer, num_layers=cfg.n_layers)
         self.n_heads = cfg.n_heads
         self.Wq = nn.Linear(d, d)

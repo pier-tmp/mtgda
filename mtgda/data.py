@@ -209,7 +209,9 @@ def make_dataloaders(data_dir=config.DATA_DIR, batch_size=64, val_frac=config.VA
 
     def dl(ds, shuffle=False, drop_last=False):
         return DataLoader(ds, batch_size=batch_size, shuffle=shuffle, num_workers=num_workers,
-                          collate_fn=collate, drop_last=drop_last)
+                          collate_fn=collate, drop_last=drop_last,
+                          pin_memory=num_workers > 0,
+                          persistent_workers=num_workers > 0)
 
     meta = {
         "n_cards": cards["n_cards"], "vocab_size": cards["vocab_size"],

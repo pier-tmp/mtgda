@@ -33,6 +33,13 @@ class DraftLit(L.LightningModule):
     def training_step(self, batch, batch_idx):
         return self._step(batch, "train")
 
+    def on_before_optimizer_step(self, optimizer):
+        for i, layer in enumerate(self.model.backbone.layers):
+            sq = sum((p.grad.detach() ** 2).sum() for p in layer.parameters() if p.grad is not None)
+            self.log(f"gradnorm_layer{i}", float(sq ** 0.5))
+        enc_sq = sum((p.grad.detach() ** 2).sum() for p in self.model.card_encoder.parameters() if p.grad is not None)
+        self.log("gradnorm_card_encoder", float(enc_sq ** 0.5))
+
     def validation_step(self, batch, batch_idx):
         return self._step(batch, "val")
 
