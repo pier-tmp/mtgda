@@ -10,8 +10,8 @@ from optuna_integration.pytorch_lightning import PyTorchLightningPruningCallback
 
 from . import config
 from .config import ModelConfig, TrainConfig, TuneConfig
-from .data import make_dataloaders
-from .lit import DraftLit
+from .data import make_encdec_loaders
+from .lit import EncDecLit
 
 
 def _suggest_float(trial, name, spec):
@@ -34,17 +34,16 @@ def suggest_cfg(trial, space):
         batch_size=trial.suggest_categorical("batch_size", space.batch_size),
         lr=_suggest_float(trial, "lr", space.lr),
         weight_decay=_suggest_float(trial, "weight_decay", space.weight_decay),
-        label_smoothing=_suggest_float(trial, "label_smoothing", space.label_smoothing),
     )
     return model_cfg, train_cfg
 
 
 def objective(trial, space, epochs, data_dir, num_workers=0):
     model_cfg, train_cfg = suggest_cfg(trial, space)
-    loaders, meta = make_dataloaders(
+    loaders, meta = make_encdec_loaders(
         data_dir, batch_size=train_cfg.batch_size,
         shuffle_within_pack=train_cfg.shuffle_within_pack, num_workers=num_workers)
-    lit = DraftLit(meta, model_cfg, train_cfg)
+    lit = EncDecLit(meta, model_cfg, train_cfg)
     pruning = PyTorchLightningPruningCallback(trial, monitor="val_top3")
     trainer = L.Trainer(
         max_epochs=epochs,

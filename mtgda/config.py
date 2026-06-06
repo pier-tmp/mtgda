@@ -17,21 +17,19 @@ HOLDOUT = ("SOS",)
 
 @dataclass
 class ModelConfig:
-    d_model: int = 128
-    n_heads: int = 2
-    n_layers: int = 3
-    ff_dim: int = 128
-    dropout: float = 0.32
+    d_model: int = 96
+    n_heads: int = 4
+    n_layers: int = 2
+    ff_dim: int = 192
+    dropout: float = 0.1
 
 
 @dataclass
 class TrainConfig:
     batch_size: int = 128
-    lr: float = 5.2e-4
-    weight_decay: float = 2.6e-4
-    label_smoothing: float = 0.079
-    aux_lambda: float = 0.1
-    max_epochs: int = 40
+    lr: float = 1e-3
+    weight_decay: float = 1e-4
+    max_epochs: int = 30
     shuffle_within_pack: bool = True
 
 
@@ -44,16 +42,14 @@ class TuneConfig:
     dropout: tuple = None
     lr: tuple = None
     weight_decay: tuple = None
-    label_smoothing: tuple = None
     batch_size: list = None
 
     def __post_init__(self):
-        if self.d_model is None:         self.d_model = [128, 256]
+        if self.d_model is None:         self.d_model = [64, 96, 128]
         if self.n_heads is None:         self.n_heads = [4, 8]
-        if self.n_layers is None:        self.n_layers = (3, 6)
-        if self.ff_dim is None:          self.ff_dim = [256, 512, 768]
+        if self.n_layers is None:        self.n_layers = (2, 4)
+        if self.ff_dim is None:          self.ff_dim = [128, 192, 256]
         if self.batch_size is None:      self.batch_size = [128, 256]
-        if self.dropout is None:         self.dropout = (0.1, 0.4)
-        if self.lr is None:              self.lr = (1e-4, 3e-3, "log")
-        if self.weight_decay is None:    self.weight_decay = (1e-4, 1e-2, "log")
-        if self.label_smoothing is None: self.label_smoothing = (0.05, 0.13)
+        if self.dropout is None:         self.dropout = (0.0, 0.3)
+        if self.lr is None:              self.lr = (3e-4, 3e-3, "log")
+        if self.weight_decay is None:    self.weight_decay = (1e-5, 1e-3, "log")
