@@ -9,7 +9,7 @@ VAL_FRAC = 0.05
 TEST_FRAC = 0.05
 SEED = 42
 
-FACE_DIM = 989
+FACE_DIM = 1196
 N_LAYOUTS = 6
 LAYOUT_FLAGS = ["single", "mdfc", "transform", "split", "adventure", "flip"]
 HOLDOUT = ("SOS",)

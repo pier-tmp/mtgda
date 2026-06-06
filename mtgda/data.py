@@ -32,18 +32,34 @@ def load_cards(data_dir):
     }
 
 
-def load_aux(data_dir, oracle2gid, n_cards):
-    z = np.load(Path(data_dir) / "aux.npz", allow_pickle=True)
-    cols = list(z["cols"])
-    gih_i = cols.index("gih_wr")
+def _load_aux_col(path, col, oracle2gid, n_cards):
+    z = np.load(path, allow_pickle=True)
+    ci = list(z["cols"]).index(col)
     target = np.zeros(n_cards + 2, dtype=np.float32)
     mask = np.zeros(n_cards + 2, dtype=np.float32)
     for oid, row in zip(z["oracle_ids"], z["values"]):
         gid = oracle2gid.get(str(oid))
         if gid is not None:
-            target[gid] = row[gih_i]
+            target[gid] = row[ci]
             mask[gid] = 1.0
     return target[1:1 + n_cards], mask[1:1 + n_cards]
+
+
+def _zscore(t, m):
+    v = t[m > 0]
+    mu, sd = v.mean(), v.std()
+    out = np.zeros_like(t)
+    out[m > 0] = (t[m > 0] - mu) / (sd if sd > 0 else 1.0)
+    return out
+
+
+def load_aux(data_dir, oracle2gid, n_cards):
+    data_dir = Path(data_dir)
+    ata_t, ata_m = _load_aux_col(data_dir / "ata.npz", "ata_strength", oracle2gid, n_cards)
+    wr_t, wr_m = _load_aux_col(data_dir / "aux.npz", "gih_wr", oracle2gid, n_cards)
+    target = np.stack([_zscore(ata_t, ata_m), _zscore(wr_t, wr_m)], axis=1)
+    mask = np.stack([ata_m, wr_m], axis=1)
+    return target, mask
 
 
 def unroll_draft(pack_cards_d, picked_card_d, pack_pick_d, pack_size_d, picks_per_pack, pick_gid):

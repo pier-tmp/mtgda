@@ -58,7 +58,7 @@ class DecoderOnlyDraft(nn.Module):
         self.n_heads = cfg.n_heads
         self.Wq = nn.Linear(d, d)
         self.Wk = nn.Linear(d, d)
-        self.aux_head = nn.Linear(d, 1)
+        self.aux_head = nn.Linear(d, 2)
 
     def card_table(self, face_vecs, face_mask, layout):
         enc = self.card_encoder(face_vecs, face_mask, layout)
@@ -86,5 +86,5 @@ class DecoderOnlyDraft(nn.Module):
         h = self.b_forward(x, attn_mask)
         logits = self.score(h, batch["pick_batch"], batch["pick_pos"],
                             batch["cand_idx"], batch["cand_mask"])
-        aux = self.aux_head(table[1:1 + self.n_cards]).squeeze(-1)
+        aux = self.aux_head(table[1:1 + self.n_cards])
         return logits, aux
