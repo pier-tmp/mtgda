@@ -11,7 +11,8 @@ from .lit import EncDecLit
 
 
 def run_training_encdec(model_cfg, train_cfg, data_dir=None, mlflow_uri=None, artifact_location=None,
-                        experiment_name="mtgda-v2", run_name=None, num_workers=0, monitor_per_epoch=True):
+                        experiment_name="mtgda-v2", run_name=None, num_workers=0, monitor_per_epoch=True,
+                        early_stop=True):
     data_dir = data_dir or config.DATA_DIR
     if mlflow_uri is None:
         (config.ROOT / "volume").mkdir(parents=True, exist_ok=True)
@@ -29,9 +30,12 @@ def run_training_encdec(model_cfg, train_cfg, data_dir=None, mlflow_uri=None, ar
     with tempfile.TemporaryDirectory() as ckpt_dir:
         ckpt = ModelCheckpoint(dirpath=ckpt_dir, monitor="val_loss", mode="min", save_top_k=1,
                                filename="best-{epoch}-{val_loss:.3f}")
-        callbacks = [ckpt, EarlyStopping(monitor="val_loss", mode="min", patience=8)]
+        callbacks = [ckpt]
+        if early_stop:
+            callbacks.append(EarlyStopping(monitor="val_loss", mode="min", patience=8))
         trainer = L.Trainer(max_epochs=train_cfg.max_epochs, logger=logger, callbacks=callbacks,
-                            accelerator="auto", devices="auto", precision="bf16-mixed")
+                            accelerator="auto", devices="auto", precision="bf16-mixed",
+                            gradient_clip_val=train_cfg.grad_clip if train_cfg.grad_clip > 0 else None)
         if monitor_per_epoch and loaders["test_holdout"] is not None:
             val_loaders = [loaders["val"], loaders["test_known"], loaders["test_holdout"]]
         else:

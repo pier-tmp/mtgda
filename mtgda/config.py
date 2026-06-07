@@ -30,6 +30,8 @@ class TrainConfig:
     lr: float = 1e-3
     weight_decay: float = 1e-4
     max_epochs: int = 30
+    warmup_epochs: int = 0
+    grad_clip: float = 0.0
     shuffle_within_pack: bool = True
 
 

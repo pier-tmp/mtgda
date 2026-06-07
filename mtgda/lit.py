@@ -19,6 +19,17 @@ class EncDecLit(L.LightningModule):
         sched = torch.optim.lr_scheduler.CosineAnnealingLR(opt, T_max=self.train_cfg.max_epochs)
         return {"optimizer": opt, "lr_scheduler": sched}
 
+    def on_train_epoch_start(self):
+        warmup = self.train_cfg.warmup_epochs
+        if warmup and self.current_epoch < warmup:
+            scale = (self.current_epoch + 1) / (warmup + 1)
+            for pg in self.optimizers().param_groups:
+                pg["lr"] = self.train_cfg.lr * scale
+        elif warmup and self.current_epoch == warmup:
+            for pg in self.optimizers().param_groups:
+                pg["lr"] = self.train_cfg.lr
+        self.log("lr", self.optimizers().param_groups[0]["lr"])
+
     def training_step(self, batch, batch_idx):
         return self._step(batch, "train")
 
