@@ -3,3 +3,4 @@ numpy
 scikit-learn
 joblib
 sentence-transformers>=2.2
+huggingface_hub
