@@ -1,0 +1,40 @@
+{
+  "category": "modal_misc",
+  "patterns": [
+    {
+      "name": "choose_one",
+      "regex": "choose one",
+      "kind": "flag"
+    },
+    {
+      "name": "modal",
+      "regex": "choose (one|two|up to)",
+      "kind": "flag"
+    },
+    {
+      "name": "extra_turn",
+      "regex": "take an extra turn",
+      "kind": "flag"
+    },
+    {
+      "name": "copy",
+      "regex": "create a (token that's a )?copy",
+      "kind": "flag"
+    },
+    {
+      "name": "untap",
+      "regex": "untap",
+      "kind": "flag"
+    },
+    {
+      "name": "explore",
+      "regex": "explore",
+      "kind": "flag"
+    },
+    {
+      "name": "investigate",
+      "regex": "investigate",
+      "kind": "flag"
+    }
+  ]
+}

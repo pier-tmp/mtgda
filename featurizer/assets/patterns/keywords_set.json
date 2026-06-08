@@ -1,0 +1,25 @@
+{
+  "category": "keywords_set",
+  "patterns": [
+    {
+      "name": "transform_dfc",
+      "regex": "transform|daybound|nightbound",
+      "kind": "flag"
+    },
+    {
+      "name": "crew",
+      "regex": "crew (\\d+)",
+      "kind": "quant"
+    },
+    {
+      "name": "cycling_typed",
+      "regex": "\\w*cycling",
+      "kind": "flag"
+    },
+    {
+      "name": "earthbend",
+      "regex": "earthbend|airbend|firebending|waterbend",
+      "kind": "flag"
+    }
+  ]
+}

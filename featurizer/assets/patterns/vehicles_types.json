@@ -1,0 +1,35 @@
+{
+  "category": "vehicles_types",
+  "patterns": [
+    {
+      "name": "vehicle_crew",
+      "regex": "crew",
+      "kind": "flag"
+    },
+    {
+      "name": "class_level",
+      "regex": "level \\d|class",
+      "kind": "flag"
+    },
+    {
+      "name": "saga_chapter",
+      "regex": "(i|ii|iii|iv) —",
+      "kind": "flag"
+    },
+    {
+      "name": "adventure",
+      "regex": "adventure",
+      "kind": "flag"
+    },
+    {
+      "name": "planeswalker_loyalty",
+      "regex": "loyalty",
+      "kind": "flag"
+    },
+    {
+      "name": "room_door",
+      "regex": "\\bdoor\\b",
+      "kind": "flag"
+    }
+  ]
+}

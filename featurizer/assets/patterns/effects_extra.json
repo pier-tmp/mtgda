@@ -1,0 +1,155 @@
+{
+  "category": "effects_extra",
+  "patterns": [
+    {
+      "name": "damage_each_opponent",
+      "regex": "damage to each opponent",
+      "kind": "flag"
+    },
+    {
+      "name": "damage_each_creature",
+      "regex": "damage to each creature",
+      "kind": "flag"
+    },
+    {
+      "name": "each_opponent_loses",
+      "regex": "each opponent loses",
+      "kind": "flag"
+    },
+    {
+      "name": "where_x_is",
+      "regex": "where x is",
+      "kind": "flag"
+    },
+    {
+      "name": "bottom_of_library",
+      "regex": "bottom of .{0,5}library",
+      "kind": "flag"
+    },
+    {
+      "name": "top_of_library_put",
+      "regex": "on top of .{0,5}library",
+      "kind": "flag"
+    },
+    {
+      "name": "shuffle_into_library",
+      "regex": "shuffle .{0,30}into .{0,15}library",
+      "kind": "flag"
+    },
+    {
+      "name": "additional_cost",
+      "regex": "as an additional cost",
+      "kind": "flag"
+    },
+    {
+      "name": "indestructible_until",
+      "regex": "indestructible until",
+      "kind": "flag"
+    },
+    {
+      "name": "cant_block_this_turn",
+      "regex": "creatures? can'?t block",
+      "kind": "flag"
+    },
+    {
+      "name": "unblocked_attacker",
+      "regex": "unblocked attacker",
+      "kind": "flag"
+    },
+    {
+      "name": "damage_prevented_no",
+      "regex": "damage can'?t be prevented",
+      "kind": "flag"
+    },
+    {
+      "name": "cant_cast",
+      "regex": "can'?t cast",
+      "kind": "flag"
+    },
+    {
+      "name": "flicker_blink",
+      "regex": "exile .{0,40}return .{0,20}battlefield",
+      "kind": "flag"
+    },
+    {
+      "name": "phase_out",
+      "regex": "phases? out",
+      "kind": "flag"
+    },
+    {
+      "name": "an_opponent_loses_game",
+      "regex": "loses the game",
+      "kind": "flag"
+    },
+    {
+      "name": "can_block_only",
+      "regex": "can block only",
+      "kind": "flag"
+    },
+    {
+      "name": "hexproof_from_color",
+      "regex": "hexproof from",
+      "kind": "flag"
+    },
+    {
+      "name": "double_counters",
+      "regex": "twice that many|double .{0,15}counter",
+      "kind": "flag"
+    },
+    {
+      "name": "double_power",
+      "regex": "double .{0,15}power",
+      "kind": "flag"
+    },
+    {
+      "name": "play_from_exile_turn",
+      "regex": "may play .{0,20}exiled with",
+      "kind": "flag"
+    },
+    {
+      "name": "becomes_artifact",
+      "regex": "becomes? an? artifact",
+      "kind": "flag"
+    },
+    {
+      "name": "land_becomes_creature",
+      "regex": "becomes a \\d+/\\d+ .{0,25}creature",
+      "kind": "flag"
+    },
+    {
+      "name": "sacrifice_nonland",
+      "regex": "sacrifice a nonland permanent",
+      "kind": "flag"
+    },
+    {
+      "name": "loses_card_types",
+      "regex": "loses all .{0,10}(card )?types",
+      "kind": "flag"
+    },
+    {
+      "name": "greatest_power_among",
+      "regex": "greatest power among",
+      "kind": "flag"
+    },
+    {
+      "name": "excess_damage",
+      "regex": "excess damage",
+      "kind": "flag"
+    },
+    {
+      "name": "force_block_target",
+      "regex": "must be blocked|all creatures? able to block|able to block .{0,20}(do so|does so|must)",
+      "kind": "flag"
+    },
+    {
+      "name": "opp_discards",
+      "regex": "(each opponent|target player|that player|opponents?) .{0,15}discards?",
+      "kind": "flag"
+    },
+    {
+      "name": "opp_sacrifices",
+      "regex": "(each opponent|target player|that player|opponents?) .{0,15}sacrifices?",
+      "kind": "flag"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "category": "triggers",
+  "patterns": [
+    {
+      "name": "etb",
+      "regex": "(when|whenever) .{0,30}enters",
+      "kind": "flag"
+    },
+    {
+      "name": "etb_value",
+      "regex": "(when|whenever) .{0,30}enters.{0,45}(draw|create|deal|destroy|gain|search)",
+      "kind": "flag"
+    },
+    {
+      "name": "dies_trigger",
+      "regex": "(when|whenever) .{0,25}dies",
+      "kind": "flag"
+    },
+    {
+      "name": "attack_trigger",
+      "regex": "whenever .{0,25}attacks",
+      "kind": "flag"
+    },
+    {
+      "name": "cast_trigger",
+      "regex": "whenever you cast",
+      "kind": "flag"
+    },
+    {
+      "name": "upkeep_trigger",
+      "regex": "at the beginning of .{0,20}upkeep",
+      "kind": "flag"
+    },
+    {
+      "name": "end_step_trigger",
+      "regex": "at the beginning of .{0,20}end step",
+      "kind": "flag"
+    },
+    {
+      "name": "combat_dmg_player",
+      "regex": "deals combat damage to a player",
+      "kind": "flag"
+    },
+    {
+      "name": "landfall",
+      "regex": "landfall|whenever a land enters",
+      "kind": "flag"
+    },
+    {
+      "name": "spellcast_matters",
+      "regex": "whenever you cast .{0,20}(instant|sorcery)",
+      "kind": "flag"
+    }
+  ]
+}

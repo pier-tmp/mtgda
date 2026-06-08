@@ -1,0 +1,35 @@
+{
+  "category": "evasion_combat",
+  "patterns": [
+    {
+      "name": "cant_be_blocked",
+      "regex": "can'?t be blocked",
+      "kind": "flag"
+    },
+    {
+      "name": "cant_block",
+      "regex": "can'?t block",
+      "kind": "flag"
+    },
+    {
+      "name": "cant_attack",
+      "regex": "can'?t attack",
+      "kind": "flag"
+    },
+    {
+      "name": "extra_combat",
+      "regex": "additional combat phase",
+      "kind": "flag"
+    },
+    {
+      "name": "islandwalk",
+      "regex": "\\w+walk",
+      "kind": "flag"
+    },
+    {
+      "name": "attacks_alone",
+      "regex": "attacks alone",
+      "kind": "flag"
+    }
+  ]
+}

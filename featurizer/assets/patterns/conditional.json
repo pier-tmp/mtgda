@@ -1,0 +1,75 @@
+{
+  "category": "conditional",
+  "patterns": [
+    {
+      "name": "as_long_as",
+      "regex": "as long as",
+      "kind": "flag"
+    },
+    {
+      "name": "if_you_control_n",
+      "regex": "if you control \\w+ or more",
+      "kind": "flag"
+    },
+    {
+      "name": "conditional_etb",
+      "regex": "enters,? if",
+      "kind": "flag"
+    },
+    {
+      "name": "gained_life_turn",
+      "regex": "gained life this turn",
+      "kind": "flag"
+    },
+    {
+      "name": "damage_this_turn",
+      "regex": "dealt damage this turn",
+      "kind": "flag"
+    },
+    {
+      "name": "if_opponent_controls",
+      "regex": "if an opponent controls",
+      "kind": "flag"
+    },
+    {
+      "name": "tapped_creature_check",
+      "regex": "tapped creatures? you control",
+      "kind": "flag"
+    },
+    {
+      "name": "if_you_have_life",
+      "regex": "you have \\d+ or (more|less) life|life total",
+      "kind": "flag"
+    },
+    {
+      "name": "cast_from_exile",
+      "regex": "cast .{0,15}from exile",
+      "kind": "flag"
+    },
+    {
+      "name": "spent_colors_cast",
+      "regex": "colors? .{0,10}spent to cast",
+      "kind": "flag"
+    },
+    {
+      "name": "power_matters",
+      "regex": "equal to .{0,10}power|where x is .{0,10}power",
+      "kind": "flag"
+    },
+    {
+      "name": "toughness_matters",
+      "regex": "equal to .{0,10}toughness|rather than .{0,10}power",
+      "kind": "flag"
+    },
+    {
+      "name": "mana_spent_scales",
+      "regex": "equal to .{0,15}mana spent",
+      "kind": "flag"
+    },
+    {
+      "name": "different_powers",
+      "regex": "creatures with different powers",
+      "kind": "flag"
+    }
+  ]
+}

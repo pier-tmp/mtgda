@@ -1,0 +1,40 @@
+{
+  "category": "cost_wording",
+  "patterns": [
+    {
+      "name": "pay_n_life",
+      "regex": "pay \\{?\\d+\\}? life",
+      "kind": "flag"
+    },
+    {
+      "name": "remove_counter",
+      "regex": "remove a .{0,15}counter",
+      "kind": "flag"
+    },
+    {
+      "name": "whenever_player_casts",
+      "regex": "whenever a player casts",
+      "kind": "flag"
+    },
+    {
+      "name": "whenever_opponent",
+      "regex": "whenever an opponent",
+      "kind": "flag"
+    },
+    {
+      "name": "you_may_reveal",
+      "regex": "you may reveal",
+      "kind": "flag"
+    },
+    {
+      "name": "start_your_engines",
+      "regex": "start your engines",
+      "kind": "flag"
+    },
+    {
+      "name": "max_speed",
+      "regex": "max speed|your speed",
+      "kind": "flag"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "category": "spells_matter",
+  "patterns": [
+    {
+      "name": "noncreature_payoff",
+      "regex": "whenever you cast a noncreature spell",
+      "kind": "flag"
+    },
+    {
+      "name": "instant_sorcery_cast",
+      "regex": "whenever you cast an? (instant|sorcery)",
+      "kind": "flag"
+    },
+    {
+      "name": "cast_two_spells",
+      "regex": "cast (two or more|your second)",
+      "kind": "flag"
+    },
+    {
+      "name": "copy_spell",
+      "regex": "cop(y|ies) (that|target) (spell|instant|sorcery)",
+      "kind": "flag"
+    }
+  ]
+}

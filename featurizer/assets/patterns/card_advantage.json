@@ -1,0 +1,35 @@
+{
+  "category": "card_advantage",
+  "patterns": [
+    {
+      "name": "search_library",
+      "regex": "search your library",
+      "kind": "flag"
+    },
+    {
+      "name": "reveal",
+      "regex": "reveal",
+      "kind": "flag"
+    },
+    {
+      "name": "look_at_top",
+      "regex": "look at the top",
+      "kind": "flag"
+    },
+    {
+      "name": "impulse_draw",
+      "regex": "exile the top .{0,30}may (play|cast)",
+      "kind": "flag"
+    },
+    {
+      "name": "tutor_to_hand",
+      "regex": "search your library for a .{0,30}(card|creature).{0,30}hand",
+      "kind": "flag"
+    },
+    {
+      "name": "draw_then_discard",
+      "regex": "draw .{0,15}then discard",
+      "kind": "flag"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "category": "players_targets",
+  "patterns": [
+    {
+      "name": "each_opponent",
+      "regex": "each opponent",
+      "kind": "flag"
+    },
+    {
+      "name": "each_player",
+      "regex": "each player",
+      "kind": "flag"
+    },
+    {
+      "name": "target_player",
+      "regex": "target player",
+      "kind": "flag"
+    },
+    {
+      "name": "you_control_matters",
+      "regex": "creatures you control",
+      "kind": "flag"
+    },
+    {
+      "name": "target_opponent",
+      "regex": "target opponent",
+      "kind": "flag"
+    },
+    {
+      "name": "each_creature",
+      "regex": "each creature",
+      "kind": "flag"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "category": "tokens_board",
+  "patterns": [
+    {
+      "name": "creates_treasure",
+      "regex": "treasure token",
+      "kind": "flag"
+    },
+    {
+      "name": "creates_food",
+      "regex": "food token",
+      "kind": "flag"
+    },
+    {
+      "name": "creates_clue",
+      "regex": "clue token",
+      "kind": "flag"
+    },
+    {
+      "name": "anthem",
+      "regex": "creatures you control get \\+",
+      "kind": "flag"
+    },
+    {
+      "name": "lord_typal",
+      "regex": "other .{0,15}creatures you control get \\+",
+      "kind": "flag"
+    }
+  ]
+}

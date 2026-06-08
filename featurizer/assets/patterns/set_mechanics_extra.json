@@ -1,0 +1,10 @@
+{
+  "category": "set_mechanics_extra",
+  "patterns": [
+    {
+      "name": "descend",
+      "regex": "descend",
+      "kind": "flag"
+    }
+  ]
+}

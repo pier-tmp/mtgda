@@ -1,0 +1,20 @@
+{
+  "category": "counters_typed",
+  "patterns": [
+    {
+      "name": "stun_counter",
+      "regex": "stun counter",
+      "kind": "flag"
+    },
+    {
+      "name": "poison_counter",
+      "regex": "poison counter",
+      "kind": "flag"
+    },
+    {
+      "name": "saga_lore",
+      "regex": "lore counter",
+      "kind": "flag"
+    }
+  ]
+}

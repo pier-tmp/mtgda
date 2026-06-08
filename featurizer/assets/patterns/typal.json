@@ -1,0 +1,15 @@
+{
+  "category": "typal",
+  "patterns": [
+    {
+      "name": "other_type_you_control",
+      "regex": "other \\w+ you control",
+      "kind": "flag"
+    },
+    {
+      "name": "for_each_type",
+      "regex": "for each \\w+ you control",
+      "kind": "flag"
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "category": "resource_payoff",
+  "patterns": [
+    {
+      "name": "equal_number_of",
+      "regex": "equal to the number of",
+      "kind": "flag"
+    },
+    {
+      "name": "cards_in_hand_matters",
+      "regex": "cards? in .{0,15}hand",
+      "kind": "flag"
+    },
+    {
+      "name": "four_card_types_gy",
+      "regex": "four or more card types",
+      "kind": "flag"
+    },
+    {
+      "name": "shares_creature_type",
+      "regex": "shares? a creature type",
+      "kind": "flag"
+    },
+    {
+      "name": "base_pt",
+      "regex": "base power and toughness",
+      "kind": "flag"
+    },
+    {
+      "name": "noncreature_nonland",
+      "regex": "noncreature.{0,5}nonland",
+      "kind": "flag"
+    },
+    {
+      "name": "artifacts_you_control",
+      "regex": "artifacts? you control",
+      "kind": "flag"
+    },
+    {
+      "name": "enchantments_matter",
+      "regex": "enchantments? you control",
+      "kind": "flag"
+    },
+    {
+      "name": "lands_you_control",
+      "regex": "lands? you control",
+      "kind": "flag"
+    },
+    {
+      "name": "legendary_matters",
+      "regex": "legendary",
+      "kind": "flag"
+    },
+    {
+      "name": "instant_sorcery_gy",
+      "regex": "instant (and|or) sorcery",
+      "kind": "flag"
+    }
+  ]
+}

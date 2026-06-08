@@ -1,0 +1,30 @@
+{
+  "category": "mechanics",
+  "patterns": [
+    {
+      "name": "face_down_up",
+      "regex": "face (down|up)",
+      "kind": "flag"
+    },
+    {
+      "name": "once_per_turn",
+      "regex": "only once each turn",
+      "kind": "flag"
+    },
+    {
+      "name": "gain_control",
+      "regex": "gain control of",
+      "kind": "flag"
+    },
+    {
+      "name": "ward_cost",
+      "regex": "ward \\{?\\d",
+      "kind": "flag"
+    },
+    {
+      "name": "cant_be_countered",
+      "regex": "can'?t be countered",
+      "kind": "flag"
+    }
+  ]
+}

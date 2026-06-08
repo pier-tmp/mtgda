@@ -1,0 +1,15 @@
+{
+  "category": "set_mechanics_extra2",
+  "patterns": [
+    {
+      "name": "job_select",
+      "regex": "job select",
+      "kind": "flag"
+    },
+    {
+      "name": "seek",
+      "regex": "\\bseek\\b",
+      "kind": "flag"
+    }
+  ]
+}

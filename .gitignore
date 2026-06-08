@@ -1,32 +1,17 @@
-# --- Python ---
-__pycache__/
-*.py[cod]
-*.egg-info/
-.venv/
-venv/
-env/
-.ipynb_checkpoints/
+/*
+!/.gitignore
+!/README.md
+!/example.py
+!/inference.py
+!/model.py
+!/requirements.txt
+!/static/
+!/featurizer/
+!/model/
 
-# --- progetto ---
-.claude/
-plan.md
-notebooks/
-data/
-
-# --- ML / tracking ---
-volume/
-mlruns/
-*.ckpt
 *.onnx
 *.pt
 *.pth
 
-# --- IDE / OS ---
-.vscode/
-.idea/
-.DS_Store
-Thumbs.db
-
-scripts/
-tests/
-analysis/
+__pycache__/
+*.py[cod]

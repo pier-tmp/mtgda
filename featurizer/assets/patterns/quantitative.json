@@ -1,0 +1,110 @@
+{
+  "category": "quantitative",
+  "patterns": [
+    {
+      "name": "draw_n",
+      "regex": "draw .{0,15}cards?",
+      "kind": "quant"
+    },
+    {
+      "name": "damage_n",
+      "regex": "deals? .{0,20}damage",
+      "kind": "quant"
+    },
+    {
+      "name": "pump_power",
+      "regex": "\\+(\\d+)/\\+\\d+",
+      "kind": "quant"
+    },
+    {
+      "name": "shrink_power",
+      "regex": "-(\\d+)/-\\d+",
+      "kind": "quant"
+    },
+    {
+      "name": "gain_life_n",
+      "regex": "gains? .{0,15}life",
+      "kind": "quant"
+    },
+    {
+      "name": "lose_life_n",
+      "regex": "loses? .{0,15}life",
+      "kind": "quant"
+    },
+    {
+      "name": "create_tokens_n",
+      "regex": "creates? .{0,40}token",
+      "kind": "quant"
+    },
+    {
+      "name": "counters_n",
+      "regex": "(\\w+) \\+1/\\+1 counters?",
+      "kind": "quant"
+    },
+    {
+      "name": "minus_counters_n",
+      "regex": "(\\w+) -1/-1 counters?",
+      "kind": "quant"
+    },
+    {
+      "name": "mill_n",
+      "regex": "mill (\\w+)",
+      "kind": "quant"
+    },
+    {
+      "name": "scry_n",
+      "regex": "scry (\\w+)",
+      "kind": "quant"
+    },
+    {
+      "name": "surveil_n",
+      "regex": "surveil (\\w+)",
+      "kind": "quant"
+    },
+    {
+      "name": "discard_n",
+      "regex": "discard .{0,15}cards?",
+      "kind": "quant"
+    },
+    {
+      "name": "add_mana_n",
+      "regex": "add .{0,15}mana",
+      "kind": "quant"
+    },
+    {
+      "name": "token_power_xx",
+      "regex": "(\\d+)/(\\d+) .{0,15}creature token",
+      "kind": "quant"
+    },
+    {
+      "name": "for_each_count",
+      "regex": "for each (\\w+)",
+      "kind": "quant"
+    },
+    {
+      "name": "dmg_equal_power",
+      "regex": "damage equal to (its|that|this) power",
+      "kind": "flag"
+    },
+    {
+      "name": "devotion",
+      "regex": "devotion to",
+      "kind": "flag"
+    },
+    {
+      "name": "domain",
+      "regex": "basic land type|\\bdomain\\b",
+      "kind": "flag"
+    },
+    {
+      "name": "colors_among",
+      "regex": "colors among",
+      "kind": "flag"
+    },
+    {
+      "name": "nonbasic_count",
+      "regex": "nonbasic land",
+      "kind": "flag"
+    }
+  ]
+}

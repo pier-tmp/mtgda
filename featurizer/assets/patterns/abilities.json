@@ -1,0 +1,65 @@
+{
+  "category": "abilities",
+  "patterns": [
+    {
+      "name": "tap_ability",
+      "regex": "\\{t\\}:",
+      "kind": "flag"
+    },
+    {
+      "name": "mana_ability",
+      "regex": "\\{t\\}: add",
+      "kind": "flag"
+    },
+    {
+      "name": "activated_mana",
+      "regex": "\\{\\d+\\}.{0,4}:",
+      "kind": "flag"
+    },
+    {
+      "name": "sac_outlet",
+      "regex": "sacrifice (a|another|two|three|\\w+) .{0,20}:",
+      "kind": "flag"
+    },
+    {
+      "name": "may_pay",
+      "regex": "you may pay",
+      "kind": "flag"
+    },
+    {
+      "name": "kicker",
+      "regex": "kicker",
+      "kind": "flag"
+    },
+    {
+      "name": "convoke",
+      "regex": "convoke",
+      "kind": "flag"
+    },
+    {
+      "name": "x_spell",
+      "regex": "\\{x\\}",
+      "kind": "flag"
+    },
+    {
+      "name": "cost_reduction",
+      "regex": "costs? \\{?\\d?\\}? ?less",
+      "kind": "flag"
+    },
+    {
+      "name": "cost_increase",
+      "regex": "costs? \\{?\\d?\\}? ?more",
+      "kind": "flag"
+    },
+    {
+      "name": "enters_tapped",
+      "regex": "enters .{0,15}tapped",
+      "kind": "flag"
+    },
+    {
+      "name": "grant_keyword",
+      "regex": "you control (gain|have) .{0,25}(flying|trample|lifelink|deathtouch|haste|vigilance|menace|first strike|double strike|hexproof|indestructible|reach|flash|protection|ward|prowess|defender)",
+      "kind": "flag"
+    }
+  ]
+}

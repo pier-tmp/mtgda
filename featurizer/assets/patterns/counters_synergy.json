@@ -1,0 +1,25 @@
+{
+  "category": "counters_synergy",
+  "patterns": [
+    {
+      "name": "plus_counter_ref",
+      "regex": "\\+1/\\+1 counter",
+      "kind": "flag"
+    },
+    {
+      "name": "minus_counter_ref",
+      "regex": "-1/-1 counter",
+      "kind": "flag"
+    },
+    {
+      "name": "proliferate",
+      "regex": "proliferate",
+      "kind": "flag"
+    },
+    {
+      "name": "counter_on_matters",
+      "regex": "with a .{0,15}counter on",
+      "kind": "flag"
+    }
+  ]
+}

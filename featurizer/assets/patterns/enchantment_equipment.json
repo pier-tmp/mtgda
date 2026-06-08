@@ -1,0 +1,40 @@
+{
+  "category": "enchantment_equipment",
+  "patterns": [
+    {
+      "name": "equip_cost",
+      "regex": "equip \\{?\\d",
+      "kind": "flag"
+    },
+    {
+      "name": "equipped_bonus",
+      "regex": "equipped creature (gets|has)",
+      "kind": "flag"
+    },
+    {
+      "name": "enchant_creature",
+      "regex": "enchant creature",
+      "kind": "flag"
+    },
+    {
+      "name": "enchant_perm",
+      "regex": "enchant (artifact|land|player|permanent)",
+      "kind": "flag"
+    },
+    {
+      "name": "enchanted_changes",
+      "regex": "enchanted (creature|permanent|land) (gets|has|is|can|doesn)",
+      "kind": "flag"
+    },
+    {
+      "name": "bestow",
+      "regex": "bestow",
+      "kind": "flag"
+    },
+    {
+      "name": "aura_you_control",
+      "regex": "auras? you control",
+      "kind": "flag"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "category": "protection",
+  "patterns": [
+    {
+      "name": "regenerate",
+      "regex": "regenerate",
+      "kind": "flag"
+    },
+    {
+      "name": "prevent_damage",
+      "regex": "prevent .{0,20}damage",
+      "kind": "flag"
+    }
+  ]
+}

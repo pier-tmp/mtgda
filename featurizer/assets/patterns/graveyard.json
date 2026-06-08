@@ -1,0 +1,40 @@
+{
+  "category": "graveyard",
+  "patterns": [
+    {
+      "name": "graveyard_matters",
+      "regex": "(from your graveyard|cards? in .{0,12}graveyard|in your graveyard)",
+      "kind": "flag"
+    },
+    {
+      "name": "return_from_gy",
+      "regex": "return .{0,40}from .{0,15}graveyard",
+      "kind": "flag"
+    },
+    {
+      "name": "exile_from_gy",
+      "regex": "exile .{0,40}from .{0,15}graveyard",
+      "kind": "flag"
+    },
+    {
+      "name": "self_recursion",
+      "regex": "return (this|~|it) .{0,20}from .{0,10}graveyard",
+      "kind": "flag"
+    },
+    {
+      "name": "flashback",
+      "regex": "flashback",
+      "kind": "flag"
+    },
+    {
+      "name": "mill_self",
+      "regex": "mill .{0,15}yourself|put .{0,20}into your graveyard",
+      "kind": "flag"
+    },
+    {
+      "name": "unearth",
+      "regex": "unearth",
+      "kind": "flag"
+    }
+  ]
+}

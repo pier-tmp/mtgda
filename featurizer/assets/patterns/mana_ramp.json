@@ -1,0 +1,45 @@
+{
+  "category": "mana_ramp",
+  "patterns": [
+    {
+      "name": "ramp_land",
+      "regex": "search your library for a .{0,20}land",
+      "kind": "flag"
+    },
+    {
+      "name": "add_one_any",
+      "regex": "add one mana of any",
+      "kind": "flag"
+    },
+    {
+      "name": "energy",
+      "regex": "\\{e\\}|energy counter",
+      "kind": "flag"
+    },
+    {
+      "name": "ritual_mana",
+      "regex": "add \\{[wubrgc]\\}\\{[wubrgc]\\}",
+      "kind": "flag"
+    },
+    {
+      "name": "extra_land_drop",
+      "regex": "play an additional land",
+      "kind": "flag"
+    },
+    {
+      "name": "mana_any_color",
+      "regex": "mana of any color",
+      "kind": "flag"
+    },
+    {
+      "name": "cost_alt",
+      "regex": "rather than pay .{0,15}mana cost",
+      "kind": "flag"
+    },
+    {
+      "name": "cost_less_per",
+      "regex": "less to cast for each",
+      "kind": "flag"
+    }
+  ]
+}

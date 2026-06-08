@@ -1,0 +1,15 @@
+{
+  "category": "tokens_named",
+  "patterns": [
+    {
+      "name": "spirit_token",
+      "regex": "create .{0,20}spirit.{0,15}token",
+      "kind": "flag"
+    },
+    {
+      "name": "tapped_attacking_token",
+      "regex": "tapped and attacking",
+      "kind": "flag"
+    }
+  ]
+}

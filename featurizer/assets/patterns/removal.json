@@ -1,0 +1,80 @@
+{
+  "category": "removal",
+  "patterns": [
+    {
+      "name": "destroy_target",
+      "regex": "destroy target",
+      "kind": "flag"
+    },
+    {
+      "name": "exile_target",
+      "regex": "exile target",
+      "kind": "flag"
+    },
+    {
+      "name": "counter_spell",
+      "regex": "counter target .{0,15}spell",
+      "kind": "flag"
+    },
+    {
+      "name": "tap_target",
+      "regex": "tap target",
+      "kind": "flag"
+    },
+    {
+      "name": "fight",
+      "regex": "fights?",
+      "kind": "flag"
+    },
+    {
+      "name": "return_to_hand",
+      "regex": "return target .{0,40}to .{0,20}hand",
+      "kind": "flag"
+    },
+    {
+      "name": "destroy_all",
+      "regex": "destroy all",
+      "kind": "flag"
+    },
+    {
+      "name": "exile_all",
+      "regex": "exile all",
+      "kind": "flag"
+    },
+    {
+      "name": "damage_to_any",
+      "regex": "damage to any target",
+      "kind": "flag"
+    },
+    {
+      "name": "damage_to_creature",
+      "regex": "damage to target creature",
+      "kind": "flag"
+    },
+    {
+      "name": "minus_xx_target",
+      "regex": "target creature gets -",
+      "kind": "flag"
+    },
+    {
+      "name": "loses_abilities",
+      "regex": "loses all abilities",
+      "kind": "flag"
+    },
+    {
+      "name": "becomes_copy",
+      "regex": "becomes a copy of",
+      "kind": "flag"
+    },
+    {
+      "name": "exile_instead_die",
+      "regex": "would die.{0,10}exile .{0,5}instead",
+      "kind": "flag"
+    },
+    {
+      "name": "polymorph",
+      "regex": "becomes a .{0,20}creature",
+      "kind": "flag"
+    }
+  ]
+}
